@@ -177,7 +177,23 @@ class LinkedList {
         }
     }
 
+    // Removes the node at the given index
+    removeAt(index) {
+        let current = this.head;
+        let prev;
+        let i = 0;
 
+        if (current) {
+            while (i < index) {
+                prev = current;
+                current = current.nextNode;
+                i += 1
+            }
+
+            prev.nextNode = current.nextNode;
+        } else {
+            return 'Linked list is empty';
+        }
+    }
+    
 }
-
-let ll = new LinkedList();
