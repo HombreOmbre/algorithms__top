@@ -11,17 +11,17 @@ class LinkedList {
     }
 
     // Insert first node
-    prepend(data) {
-        this.head = new Node(data, this.head);
+    prepend(value) {
+        this.head = new Node(value, this.head);
     }
 
     // Insert last node
-    append(data) {
+    append(value) {
         let current;
 
         // If empty, make head
         if (!this.head) {
-            this.prepend(data);
+            this.prepend(value);
         } else {
             current = this.head;
 
@@ -29,7 +29,7 @@ class LinkedList {
                 current = current.nextNode;
             }
 
-            current.nextNode = new Node(data);
+            current.nextNode = new Node(value);
         }
     }
 
@@ -80,7 +80,7 @@ class LinkedList {
             let current = this.head;
             let data;
 
-            for (let i = -1; i < index; i++) {
+            for (let i = 0; i < index; i++) {
                 data = current.data;
                 current = current.nextNode;
             }
@@ -96,15 +96,19 @@ class LinkedList {
         let current = this.head;
         let prev = null;
 
-        while (current.nextNode) {
-            prev = current
-            current = current.nextNode;
+        if (current) {
+            while (current.nextNode) {
+                prev = current
+                current = current.nextNode;
+            }
+            
+            prev.nextNode = null;
+        } else {
+            return 'This node list is already empty';
         }
-
-        prev.nextNode = null;
     }
 
-    // Returns true if the passed in value is in the list and otherwise returns false
+    // Returns true if the value is in the list
     contains(value) {
         let current = this.head;
         let data;
@@ -120,7 +124,7 @@ class LinkedList {
         return false;
     }
 
-    // Returns the index of the node containing value, or null if not found
+    // Returns the index of the node
     find(value) {
         let current = this.head;
         let data;
@@ -155,13 +159,25 @@ class LinkedList {
 
         return str + 'null'
     }
+
+    // Insert new node at the given index
+    insertAt(value, index) {
+        let current = this.head;
+        let i = 0;
+
+        if (current) {
+            while(i < (index - 1)) {
+                current = current.nextNode;
+                i += 1;
+            }
+
+            current.nextNode = new Node(value, current.nextNode);
+        } else {
+            return 'Linked list is empty';
+        }
+    }
+
+
 }
 
 let ll = new LinkedList();
-
-ll.append(20);
-ll.append(5);
-ll.append(10);
-
-
-console.log(ll.find(5));
