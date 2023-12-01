@@ -28,6 +28,18 @@ class Node {
       return new Node(arr[mid], leftSide, rightSide);
     }
   
+    #findSmallestRoot(root) {
+      let tmpData = root.data;
+      let tmpRoot = root;
+
+      while (tmpRoot.left !== null) {
+        tmpData = root.left.data;
+        tmpRoot = root.left;
+      }
+
+      return tmpData;
+    }
+  
     prettyPrint(node, prefix = '', isLeft = true) {
       if (node === null) {
         return;
@@ -48,29 +60,44 @@ class Node {
       }
     }
   
-    insert(value) {
-      let node = this.root;
-      let prev;
-  
-      while (node) {
-        if (node.data > value) {
-          prev = node;
-          node = node.left;
+    insert(value, root = this.root) {
+      if (root === null) {
+        return new Node(value);
+      }
+
+      if (value < root.data) {
+        root.left = this.insert(value, root.left);
+      } else if (value > root.data) {
+        root.right = this.insert(value, root.right);
+      }
+
+      return root;
+    }
+
+    delete(value, root = this.root) {
+      if (root === null) {
+        return root;
+      }
+
+      if (value < root.data) {
+        root.left = this.delete(value, root.left);
+      } else if (value > root.data) {
+        root.right = this.delete(value, root.right);
+      } else {
+        if (root.left === null) {
+          return root.right;
+        } else if (root.right === null) {
+          return root.left;
         } else {
-          prev = node;
-          node = node.right;
+          root.data = this.#findSmallestRoot(root.right);
+
+          root.right = this.delete(root.data, root.right);
         }
       }
-  
-      if (prev.data > value) {
-        prev.left = new Node(value);
-      } else {
-        prev.right = new Node(value);
-      }
+      return root;
     }
-  
   }
   
   const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-  tree.insert(100);
   tree.prettyPrint(tree.root);
+  
