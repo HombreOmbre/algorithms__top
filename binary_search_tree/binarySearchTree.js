@@ -96,6 +96,18 @@ class Node {
       }
       return root;
     }
+
+    find(value, root = this.root) {
+      if (root === null || root.data === value) {
+        return this.prettyPrint(root);
+      }
+
+      if (value < root.data) {
+        return this.find(value, root.left);
+      }
+      
+      return this.find(value, root.right);
+    }
   }
   
   const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
