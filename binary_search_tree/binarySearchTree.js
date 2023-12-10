@@ -108,8 +108,26 @@ class Node {
       
       return this.find(value, root.right);
     }
+
+    levelOrder(arr = [], queue = [], root = this.root) {
+      if (root === null) {
+        return;
+      }
+      arr.push(root.data);
+
+      queue.push(root.left);
+      queue.push(root.right);
+
+      while (queue.length) {
+        const level = queue[0];
+        queue.shift();
+        this.levelOrder(arr, queue, level);
+      }
+
+      return arr;
+    }
   }
   
   const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
   tree.prettyPrint(tree.root);
-  
+  console.log(tree.levelOrder());
