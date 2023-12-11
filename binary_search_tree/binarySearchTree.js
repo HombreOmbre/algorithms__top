@@ -40,7 +40,7 @@ class Node {
       return tmpData;
     }
   
-    prettyPrint(node, prefix = '', isLeft = true) {
+    prettyPrint(node = this.root, prefix = '', isLeft = true) {
       if (node === null) {
         return;
       }
@@ -99,7 +99,7 @@ class Node {
 
     find(value, root = this.root) {
       if (root === null || root.data === value) {
-        return this.prettyPrint(root);
+        return root;
       }
 
       if (value < root.data) {
@@ -129,5 +129,4 @@ class Node {
   }
   
   const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-  tree.prettyPrint(tree.root);
-  console.log(tree.levelOrder());
+  tree.prettyPrint();
