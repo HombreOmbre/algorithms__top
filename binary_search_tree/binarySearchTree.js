@@ -126,6 +126,24 @@ class Node {
 
       return arr;
     }
+
+    inOrder(arr = [], root = this.root) {
+      if (root === null) {
+        return;
+      }
+
+      if (root.left) {
+        this.inOrder(arr, root.left);
+      }
+
+      arr.push(root.data);
+
+      if (root.right) {
+        this.inOrder(arr, root.right);
+      }
+
+      return arr;
+    }
   }
   
   const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
