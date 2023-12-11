@@ -8,8 +8,7 @@ class Node {
   
   class Tree {
     constructor(arr) {
-      this.arr = this.#sortArrayAndRemoveDuplicates(arr);
-      this.root = this.#buildTree(this.arr);
+      this.root = this.#buildTree(this.#sortArrayAndRemoveDuplicates(arr));
     }
   
     #sortArrayAndRemoveDuplicates(arr) {
