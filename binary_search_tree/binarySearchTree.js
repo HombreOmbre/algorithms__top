@@ -8,7 +8,8 @@ class Node {
   
   class Tree {
     constructor(arr) {
-      this.root = this.#buildTree(this.#sortArrayAndRemoveDuplicates(arr));
+      this.arr = this.#sortArrayAndRemoveDuplicates(arr);
+      this.root = this.#buildTree(this.arr);
     }
   
     #sortArrayAndRemoveDuplicates(arr) {
@@ -211,7 +212,15 @@ class Node {
         return this.depth(node,  root.right, depth += 1);
       }
     }
+
+    isBalanced(root = this.root) {
+      const lHeight = this.height(root.left);
+      const rHeight = this.height(root.right);
+      const difference = Math.abs(lHeight - rHeight);
+      return difference < 2 ? 'true' : 'false';
+    }
   }
   
   const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
   tree.prettyPrint();
+  
