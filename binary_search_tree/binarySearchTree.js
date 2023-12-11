@@ -219,6 +219,12 @@ class Node {
       const difference = Math.abs(lHeight - rHeight);
       return difference < 2 ? 'true' : 'false';
     }
+
+    rebalance(root = this.root) {
+      let arr = this.levelOrder();
+
+      return this.root = this.#buildTree(this.#sortArrayAndRemoveDuplicates(arr));
+    }
   }
   
   const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
