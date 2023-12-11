@@ -180,6 +180,21 @@ class Node {
 
       return arr;
     }
+
+    height(root = this.root) {
+      if (root === null) {
+        return 0;
+      }
+
+      let lHeight = this.height(root.left);
+      let rHeight = this.height(root.right);
+
+      if (lHeight > rHeight) {
+        return lHeight + 1;
+      } else {
+        return rHeight + 1;
+      }
+    }
   }
   
   const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
