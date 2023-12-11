@@ -195,6 +195,22 @@ class Node {
         return rHeight + 1;
       }
     }
+
+    depth(node, root = this.root, depth = 0) {
+      if (node === null || root === null) {
+        return;
+      }
+
+      if (node === root) {
+        return depth;
+      }
+
+      if (node.data < root.data) {
+        return this.depth(node, root.left, depth += 1);
+      } else {
+        return this.depth(node,  root.right, depth += 1);
+      }
+    }
   }
   
   const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
